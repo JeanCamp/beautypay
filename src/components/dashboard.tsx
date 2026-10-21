@@ -197,7 +197,7 @@ export default function Dashboard({ userName = 'Profissional', onLogout }: Dashb
                 } />
                 <SheetContent>
                   <nav className="space-y-4 mt-8">
-                    <Button variant="ghost" className="w-full justify-start" onClick={() => router.push('/')}>
+                    <Button variant="ghost" className="w-full justify-start" onClick={() => router.push('/dashboard')}>
                       <Scissors className="w-5 h-5 mr-2" />
                       Dashboard
                     </Button>
