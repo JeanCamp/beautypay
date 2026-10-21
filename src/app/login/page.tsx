@@ -42,8 +42,14 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800 p-4">
-      <Card className="w-full max-w-md shadow-xl">
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4"
+      style={{
+        backgroundImage: 'url(/beautypay-banner.png)',
+      }}
+    >
+      <div className="absolute inset-0 bg-black/40 dark:bg-black/60" />
+      <Card className="w-full max-w-md shadow-xl relative z-10 bg-white/95 dark:bg-gray-800/95 backdrop-blur-sm">
         <CardHeader className="text-center">
           <div className="mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-600 p-4 rounded-full w-20 h-20 flex items-center justify-center">
             <Scissors className="w-10 h-10 text-white" />
