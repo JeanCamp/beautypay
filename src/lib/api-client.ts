@@ -290,7 +290,7 @@ export const fortnightClosureApi = {
         ...closure,
         year,
         month,
-        fortnight_number,
+        fortnight_number: fortnightNumber,
         start_date: '',
         end_date: '',
         total_appointments: 0,

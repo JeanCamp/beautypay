@@ -52,7 +52,8 @@ export default function RootLayout({
             </footer>
           </div>
         </ThemeProvider>
-        <Script
+        {/* Service Worker desabilitado pois usamos Supabase para dados em tempo real */}
+        {/* <Script
           id="register-sw"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
@@ -72,7 +73,7 @@ export default function RootLayout({
               }
             `,
           }}
-        />
+        /> */}
       </body>
     </html>
   );

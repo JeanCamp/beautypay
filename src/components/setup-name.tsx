@@ -6,7 +6,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Scissors } from 'lucide-react';
-import { initializeServices } from '@/lib/seed';
 
 interface SetupNameProps {
   onComplete: (name: string) => void;
@@ -21,9 +20,6 @@ export default function SetupName({ onComplete }: SetupNameProps) {
     if (!name.trim()) return;
     
     setIsLoading(true);
-    
-    // Initialize pre-configured services
-    await initializeServices();
     
     // Save name to localStorage
     localStorage.setItem('userName', name.trim());
