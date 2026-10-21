@@ -153,6 +153,10 @@ export default function Dashboard({ userName = 'Profissional', onLogout }: Dashb
     generateAlerts();
   };
 
+  const getFirstName = (fullName: string) => {
+    return fullName.split(' ')[0];
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 to-pink-50 dark:from-gray-900 dark:to-gray-800">
       {/* Header */}
@@ -165,7 +169,7 @@ export default function Dashboard({ userName = 'Profissional', onLogout }: Dashb
               </div>
               <div>
                 <h1 className="text-xl font-bold text-gray-900 dark:text-white">
-                  Olá, {userName}
+                  Olá, {getFirstName(userName)}
                 </h1>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   {formatDate(new Date())}
