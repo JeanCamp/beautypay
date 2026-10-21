@@ -9,11 +9,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "BeautyPay - Controle de Comissões",
   description: "Sistema de controle de comissões para profissionais de beleza",
-  manifest: "/manifest.json",
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: "default",
-    title: "BeautyPay",
+  icons: {
+    icon: "/beautypay-favicon.png",
+    shortcut: "/beautypay-favicon.png",
+    apple: "/beautypay-favicon.png",
   },
 };
 
