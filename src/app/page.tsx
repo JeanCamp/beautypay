@@ -2,32 +2,32 @@
 
 import { useEffect, useState } from 'react';
 import Dashboard from '@/components/dashboard';
-import SetupName from '@/components/setup-name';
+import { createClient } from '@/lib/supabase-client';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
-  const [isSetupComplete, setIsSetupComplete] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [userName, setUserName] = useState('');
+  const router = useRouter();
+  const supabase = createClient();
 
   useEffect(() => {
-    const checkSetup = () => {
-      const setupComplete = localStorage.getItem('setupComplete');
-      const name = localStorage.getItem('userName');
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
       
-      if (setupComplete && name) {
-        setIsSetupComplete(true);
-        setUserName(name);
+      if (user) {
+        setUserName(user.user_metadata?.name || user.email?.split('@')[0] || 'Usuário');
       }
       
       setIsLoading(false);
     };
 
-    checkSetup();
-  }, []);
+    getUser();
+  }, [supabase]);
 
-  const handleSetupComplete = (name: string) => {
-    setUserName(name);
-    setIsSetupComplete(true);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
   };
 
   if (isLoading) {
@@ -41,9 +41,5 @@ export default function Home() {
     );
   }
 
-  if (!isSetupComplete) {
-    return <SetupName onComplete={handleSetupComplete} />;
-  }
-
-  return <Dashboard userName={userName} />;
+  return <Dashboard userName={userName} onLogout={handleLogout} />;
 }

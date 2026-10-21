@@ -28,9 +28,10 @@ interface DashboardStats {
 
 interface DashboardProps {
   userName?: string;
+  onLogout?: () => void;
 }
 
-export default function Dashboard({ userName = 'Profissional' }: DashboardProps) {
+export default function Dashboard({ userName = 'Profissional', onLogout }: DashboardProps) {
   const router = useRouter();
   const [stats, setStats] = useState<DashboardStats>({
     today: { appointments: 0, totalServices: 0, totalCommission: 0, averageTicket: 0 },
@@ -228,6 +229,9 @@ export default function Dashboard({ userName = 'Profissional' }: DashboardProps)
                     <Button variant="ghost" className="w-full justify-start" onClick={() => router.push('/projecao')}>
                       <Target className="w-5 h-5 mr-2" />
                       Projeção e Metas
+                    </Button>
+                    <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700" onClick={onLogout}>
+                      Sair
                     </Button>
                   </nav>
                 </SheetContent>
