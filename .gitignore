@@ -37,3 +37,7 @@ next-env.d.ts
 *.db
 *.sqlite
 *.sqlite3
+
+# environment variables
+.env.local
+.env
