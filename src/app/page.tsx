@@ -21,11 +21,11 @@ export default function LandingPage() {
       {/* Formulário - Direita */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-md space-y-8">
-          <div className="text-center lg:text-left">
-            <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
+          <div className="text-center lg:text-left space-y-4">
+            <h1 className="text-5xl lg:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
               BeautyPay
             </h1>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
               Sistema de controle de comissões para profissionais de beleza
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function LandingPage() {
             <Button
               size="lg"
               onClick={() => router.push('/login')}
-              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6"
+              className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6 shadow-lg hover:shadow-xl transition-all"
             >
               Entrar
               <ArrowRight className="ml-2 w-5 h-5" />
@@ -43,7 +43,7 @@ export default function LandingPage() {
               size="lg"
               onClick={() => router.push('/register')}
               variant="outline"
-              className="w-full text-lg py-6"
+              className="w-full text-lg py-6 border-2 hover:bg-gray-50 dark:hover:bg-gray-800 transition-all"
             >
               Criar Conta
             </Button>
