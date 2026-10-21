@@ -1,51 +1,18 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { ArrowLeft, Save, Trash2, AlertTriangle } from 'lucide-react';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { ArrowLeft, Settings } from 'lucide-react';
+import { createClient } from '@/lib/supabase-client';
 
 export default function ConfiguracoesPage() {
   const router = useRouter();
-  const [name, setName] = useState('');
-  const [isSaving, setIsSaving] = useState(false);
-  const [isResetting, setIsResetting] = useState(false);
-  const [showResetConfirm, setShowResetConfirm] = useState(false);
+  const supabase = createClient();
 
-  useEffect(() => {
-    const savedName = localStorage.getItem('userName');
-    if (savedName) {
-      setName(savedName);
-    }
-  }, []);
-
-  const handleSave = () => {
-    if (!name.trim()) return;
-    
-    setIsSaving(true);
-    localStorage.setItem('userName', name.trim());
-    
-    setTimeout(() => {
-      setIsSaving(false);
-      router.push('/');
-    }, 500);
-  };
-
-  const handleReset = () => {
-    setIsResetting(true);
-    
-    // Clear all localStorage data
-    localStorage.clear();
-    
-    setTimeout(() => {
-      setIsResetting(false);
-      setShowResetConfirm(false);
-      window.location.href = '/';
-    }, 1000);
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    router.push('/login');
   };
 
   return (
@@ -73,76 +40,38 @@ export default function ConfiguracoesPage() {
         <div className="max-w-md mx-auto space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle>Editar Perfil</CardTitle>
+              <CardTitle className="flex items-center gap-2">
+                <Settings className="w-5 h-5" />
+                Sobre o Sistema
+              </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="name">Seu nome</Label>
-                <Input
-                  id="name"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  placeholder="Digite seu nome"
-                />
+              <div className="text-sm text-gray-600 dark:text-gray-400 space-y-2">
+                <p>
+                  <strong>BeautyPay</strong> é um sistema de controle de comissões para profissionais de beleza.
+                </p>
+                <p>
+                  Seus dados são armazenados de forma segura no Supabase e sincronizados entre dispositivos.
+                </p>
+                <p>
+                  Para alterar seu nome ou email, entre em contato com o administrador do sistema.
+                </p>
               </div>
-              
-              <Button
-                onClick={handleSave}
-                disabled={!name.trim() || isSaving}
-                className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
-              >
-                <Save className="w-5 h-5 mr-2" />
-                {isSaving ? 'Salvando...' : 'Salvar'}
-              </Button>
             </CardContent>
           </Card>
 
-          <Card className="border-red-200 dark:border-red-800">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-red-600 dark:text-red-400">Zona de Perigo</CardTitle>
+              <CardTitle>Sair da Conta</CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <Alert variant="destructive">
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
-                  Esta ação apagará todos os seus dados incluindo atendimentos, serviços e configurações.
-                </AlertDescription>
-              </Alert>
-              
-              {!showResetConfirm ? (
-                <Button
-                  onClick={() => setShowResetConfirm(true)}
-                  variant="destructive"
-                  className="w-full"
-                >
-                  <Trash2 className="w-5 h-5 mr-2" />
-                  Resetar Sistema
-                </Button>
-              ) : (
-                <div className="space-y-2">
-                  <p className="text-sm text-gray-600 dark:text-gray-400">
-                    Tem certeza que deseja apagar todos os dados? Esta ação não pode ser desfeita.
-                  </p>
-                  <div className="flex gap-2">
-                    <Button
-                      onClick={() => setShowResetConfirm(false)}
-                      variant="outline"
-                      className="flex-1"
-                    >
-                      Cancelar
-                    </Button>
-                    <Button
-                      onClick={handleReset}
-                      variant="destructive"
-                      className="flex-1"
-                      disabled={isResetting}
-                    >
-                      {isResetting ? 'Resetando...' : 'Confirmar'}
-                    </Button>
-                  </div>
-                </div>
-              )}
+            <CardContent>
+              <Button
+                onClick={handleLogout}
+                variant="outline"
+                className="w-full"
+              >
+                Sair
+              </Button>
             </CardContent>
           </Card>
         </div>

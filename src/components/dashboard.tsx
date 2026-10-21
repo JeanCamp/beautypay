@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Plus, Menu, Scissors, Calendar, TrendingUp, DollarSign, AlertCircle, List, Clock, Target } from 'lucide-react';
+import { Plus, Menu, Scissors, Calendar, TrendingUp, DollarSign, AlertCircle, List, Clock, Target, Settings } from 'lucide-react';
 import ThemeToggle from './theme-toggle';
 import { useRouter } from 'next/navigation';
 import { formatCurrency, formatDate, formatTime, getCurrentFortnight, getWeekDates, getMonthDates } from '@/lib/utils';
@@ -171,15 +171,6 @@ export default function Dashboard({ userName = 'Profissional', onLogout }: Dashb
                   {formatDate(new Date())}
                 </p>
               </div>
-              
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => router.push('/configuracoes')}
-                className="text-gray-600 dark:text-gray-400 hover:text-purple-600"
-              >
-                Editar nome
-              </Button>
             </div>
             
             <div className="flex items-center space-x-2">
@@ -229,6 +220,10 @@ export default function Dashboard({ userName = 'Profissional', onLogout }: Dashb
                     <Button variant="ghost" className="w-full justify-start" onClick={() => router.push('/projecao')}>
                       <Target className="w-5 h-5 mr-2" />
                       Projeção e Metas
+                    </Button>
+                    <Button variant="ghost" className="w-full justify-start" onClick={() => router.push('/configuracoes')}>
+                      <Settings className="w-5 h-5 mr-2" />
+                      Configurações
                     </Button>
                     <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700" onClick={onLogout}>
                       Sair
